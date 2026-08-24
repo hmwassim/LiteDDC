@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ddc">
+      <UniqueIdentifier>{A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ddc">
+      <UniqueIdentifier>{B2C3D4E5-F6A7-4B8C-9D0E-1F2A3B4C5D6E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="app\AdjustmentCoordinator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\TrayService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\VibranceService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\Paths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\SettingsDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ddc\CapabilitiesParser.cpp">
+      <Filter>Source Files\ddc</Filter>
+    </ClCompile>
+    <ClCompile Include="ddc\MonitorManager.cpp">
+      <Filter>Source Files\ddc</Filter>
+    </ClCompile>
+    <ClCompile Include="ddc\NativeMonitorApi.cpp">
+      <Filter>Source Files\ddc</Filter>
+    </ClCompile>
+    <ClCompile Include="ddc\PhysicalMonitorHandle.cpp">
+      <Filter>Source Files\ddc</Filter>
+    </ClCompile>
+    <ClCompile Include="ddc\VcpBus.cpp">
+      <Filter>Source Files\ddc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app\AdjustmentCoordinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\TrayService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\VibranceService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\Paths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\SettingsDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ddc\CapabilitiesParser.h">
+      <Filter>Header Files\ddc</Filter>
+    </ClInclude>
+    <ClInclude Include="ddc\MonitorManager.h">
+      <Filter>Header Files\ddc</Filter>
+    </ClInclude>
+    <ClInclude Include="ddc\NativeMonitorApi.h">
+      <Filter>Header Files\ddc</Filter>
+    </ClInclude>
+    <ClInclude Include="ddc\PhysicalMonitorHandle.h">
+      <Filter>Header Files\ddc</Filter>
+    </ClInclude>
+    <ClInclude Include="ddc\VcpCodes.h">
+      <Filter>Header Files\ddc</Filter>
+    </ClInclude>
+    <ClInclude Include="ddc\VcpBus.h">
+      <Filter>Header Files\ddc</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\AutostartUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LiteDDC.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="sun-light.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="sun-dark.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
