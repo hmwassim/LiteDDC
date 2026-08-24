@@ -1,0 +1,10 @@
+# Normalize line endings for all text files (LF stored in repo).
+* text=auto
+
+# Markdown pinned to LF regardless of platform.
+*.md text eol=lf
+
+# Text files known to be platform-sensitive.
+*.sh text eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
