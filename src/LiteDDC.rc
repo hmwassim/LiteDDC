@@ -1,0 +1,123 @@
+#include <windows.h>
+#include <commctrl.h>
+#include "utils/resource.h"
+#include "Version.h"
+
+// Compose the dotted version strings from the Version.h numbers so the
+// numeric FILEVERSION and the Properties-dialog strings can never drift
+// apart (and ship.cmd keeps both in step with the VERSION file).
+#define VER_STR_(x) #x
+#define VER_STR(x) VER_STR_(x)
+#define VER_FILE_STR VER_STR(LITEDDC_VERSION_MAJOR) "." VER_STR(LITEDDC_VERSION_MINOR) "." \
+    VER_STR(LITEDDC_VERSION_PATCH) "." VER_STR(LITEDDC_VERSION_REVISION)
+
+IDI_APP ICON "icon.ico"
+// M14 themed tray glyphs (simple sun). LIGHT = black glyph for light
+// taskbars, DARK = white glyph for dark taskbars; App swaps them live on
+// WM_SETTINGCHANGE("ImmersiveColorSet").
+IDI_APP_SUN_LIGHT ICON "sun-light.ico"
+IDI_APP_SUN_DARK ICON "sun-dark.ico"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION LITEDDC_VERSION_MAJOR,LITEDDC_VERSION_MINOR,LITEDDC_VERSION_PATCH,LITEDDC_VERSION_REVISION
+ PRODUCTVERSION LITEDDC_VERSION_MAJOR,LITEDDC_VERSION_MINOR,LITEDDC_VERSION_PATCH,LITEDDC_VERSION_REVISION
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS 0x40004L
+ FILETYPE VFT_APP
+ FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "LiteDDC"
+            VALUE "FileDescription", "LiteDDC"
+            VALUE "FileVersion", VER_FILE_STR
+            VALUE "InternalName", "LiteDDC.exe"
+            VALUE "LegalCopyright", "MIT License"
+            VALUE "OriginalFilename", "LiteDDC.exe"
+            VALUE "ProductName", "LiteDDC"
+            VALUE "ProductVersion", VER_FILE_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+//
+// Settings dialog (docs/04 section 3): fixed-size, eight parameter rows
+// (TrackBar + numeric label; Brightness/Contrast/Saturation carry a
+// scroll-gesture checkbox - volume defaults OFF, R/G/B gains and GPU
+// Vibrance are slider-only), monitor-scope and scroll-step dropdowns,
+// autostart checkbox, Close button.
+// Visual order: Brightness, Contrast, Saturation (the three core DDC
+// parameters stay grouped at the top), then Vibrance (GPU), Red/Green/Blue
+// gains, Volume (M13/M14 additions). Rows are NEVER hidden - unsupported
+// parameters gray out at runtime instead.
+//
+IDD_SETTINGS DIALOGEX 0, 0, 330, 260
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "LiteDDC Settings"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Apply to:",IDC_STATIC,10,13,36,8
+    COMBOBOX        IDC_CMB_SCOPE,52,10,150,120,CBS_DROPDOWNLIST | WS_TABSTOP
+
+    CONTROL         "Brightness",IDC_CHK_BRIGHTNESS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,38,62,10
+    CONTROL         "",IDC_TRK_BRIGHTNESS,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,34,146,16
+    RTEXT           "",IDC_LBL_BRIGHTNESS,232,38,88,10
+
+    CONTROL         "Contrast",IDC_CHK_CONTRAST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,59,62,10
+    CONTROL         "",IDC_TRK_CONTRAST,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,55,146,16
+    RTEXT           "",IDC_LBL_CONTRAST,232,59,88,10
+
+    CONTROL         "Saturation",IDC_CHK_SATURATION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,80,62,10
+    CONTROL         "",IDC_TRK_SATURATION,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,76,146,16
+    RTEXT           "",IDC_LBL_SATURATION,232,80,88,10
+
+    // M13 addition (review re-order): GPU vibrance follows the three core
+    // DDC rows; it lights up only where an NVIDIA display answers, grays
+    // otherwise.
+    LTEXT           "Vibrance (GPU)",IDC_STATIC,12,101,62,10
+    CONTROL         "",IDC_TRK_VIBRANCE,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,97,146,16
+    RTEXT           "",IDC_LBL_VIBRANCE,232,101,88,10
+
+    LTEXT           "Red gain",IDC_STATIC,12,122,62,10
+    CONTROL         "",IDC_TRK_RED,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,118,146,16
+    RTEXT           "",IDC_LBL_RED,232,122,88,10
+
+    LTEXT           "Green gain",IDC_STATIC,12,143,62,10
+    CONTROL         "",IDC_TRK_GREEN,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,139,146,16
+    RTEXT           "",IDC_LBL_GREEN,232,143,88,10
+
+    LTEXT           "Blue gain",IDC_STATIC,12,164,62,10
+    CONTROL         "",IDC_TRK_BLUE,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,160,146,16
+    RTEXT           "",IDC_LBL_BLUE,232,164,88,10
+
+    // M14 human follow-up: volume is slider-only like the R/G/B rows -
+    // no scroll checkbox at all.
+    LTEXT           "Volume",IDC_STATIC,12,185,62,10
+    CONTROL         "",IDC_TRK_VOLUME,"msctls_trackbar32",TBS_HORZ | WS_TABSTOP,
+                    80,181,146,16
+    RTEXT           "",IDC_LBL_VOLUME,232,185,88,10
+
+    LTEXT           "Scroll step:",IDC_STATIC,10,212,40,8
+    COMBOBOX        IDC_CMB_STEP,56,209,50,90,CBS_DROPDOWNLIST | WS_TABSTOP
+    CONTROL         "Start with Windows",IDC_CHK_AUTOSTART,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,124,210,100,10
+
+    PUSHBUTTON      "Close",IDC_BTN_CLOSE,264,238,56,14
+END
